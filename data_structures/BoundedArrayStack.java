@@ -36,7 +36,7 @@ public class BoundedArrayStack implements BoundedStack {
     * @param Object o
     * @throws IndexOutOfBoundsException
     */     
-   public void push(Object o){
+   public void push(Object o) {
     
       if(hasSpace()) {
       
@@ -62,11 +62,11 @@ public class BoundedArrayStack implements BoundedStack {
      * @param None
      * @throws NullPointerException
      */
-    public Object pop(){
+    public Object pop() {
     
       try {
          // Remove element on the "top" of the stack (i.e. LIFO).
-         bAStack[0] = null;      
+         bAStack[bAStack.length] = null;
       }catch(NullPointerException e){
          throw new NullPointerException("Stack contains no elements.");   
       }
