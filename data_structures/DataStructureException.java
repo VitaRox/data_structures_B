@@ -14,7 +14,10 @@ public class DataStructureException extends Exception {
      * @param String msg
      */
    public DataStructureException(String msg) {
-   
+      this.msg = msg;
    }
 
+   public String getMsg() {
+      return msg;
+   }
 }

@@ -11,6 +11,8 @@ public class UnboundedArrayStack implements UnboundedStack {
    // UnbAStack is our underlying array object.
    // O(n)
    Object[] unbAStack;
+
+   private String dataType;
    
    // Capacity is the number of elements that can be 
    // contained in bStack.
@@ -24,7 +26,7 @@ public class UnboundedArrayStack implements UnboundedStack {
     * @param None
     */
    public UnboundedArrayStack() {
-      capacity = 10;
+      capacity = 100;
       unbAStack = new Object[capacity];
    }
    

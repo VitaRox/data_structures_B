@@ -12,7 +12,11 @@ public class UnboundedArrayQueue<E extends Object> implements UnboundedQueue<E> 
    
    // unbAQueue is our underlying array object.
    // O(n)
-   Object[] unbAQueue; 
+   //E[] unbAQueue;
+
+   // dataType is String storing data type for
+   // later resizing.
+   private String dataType;
    
    // Capacity is the number of elements that can be 
    // contained in UnbAQueue in its current incarnation.
@@ -24,15 +28,69 @@ public class UnboundedArrayQueue<E extends Object> implements UnboundedQueue<E> 
     * with 10 elements.
     * @param Int capacity, how many elements it should
     * initially be able to contain.
+    * @param String dataType, the type of data each instance
+    * can work with in its underlying array.
+    * Here we have a number of constructors allowing this
+    * be instantiated for use by any data type.
     */
-   public UnboundedArrayQueue(int capacity) throws QueueIsEmpty {
-      unbAQueue = new Object[capacity];
+   public UnboundedArrayQueue(int capacity, String dataType) throws QueueIsEmpty {
+      if(this.dataType.equals("Object")) {
+        Object[] unbAQueue = new Object[capacity];
+      } else if(this.dataType.equals("String")) {
+         String[] unbAQueue = new String[capacity];
+      } else if(this.dataType.equals("float")) {
+         float[] unbAQueue = new float[capacity];
+      } else if(this.dataType.equals("double")) {
+         double[] unbAQueue = new double[capacity];
+      } else if(this.dataType.equals("int")) {
+         int[] unbAQueue = new int[capacity];
+      } else if(this.dataType.equals("long")) {
+         long[] unbAQueue = new long[capacity];
+      } else if(this.dataType.equals("short")) {
+         short[] unbAQueue = new short[capacity];
+      }
    }
+
    
    public UnboundedArrayQueue() throws QueueIsEmpty {
-      unbAQueue = new Object[10];
+       if(this.dataType.equals("Object")) {
+           Object[] unbAQueue = new Object[100];
+       } else if(this.dataType.equals("String")) {
+           String[] unbAQueue = new String[100];
+       } else if(this.dataType.equals("float")) {
+           float[] unbAQueue = new float[100];
+       } else if(this.dataType.equals("double")) {
+           double[] unbAQueue = new double[100];
+       } else if(this.dataType.equals("int")) {
+           int[] unbAQueue = new int[100];
+       } else if(this.dataType.equals("long")) {
+           long[] unbAQueue = new long[100];
+       } else if(this.dataType.equals("short")) {
+           short[] unbAQueue = new short[100];
+       }
    }
-   
+
+   public UnboundedArrayQueue(int capacity) throws QueueIsEmpty {
+       unbAQueue = new String[capacity];
+       this.dataType = "String";
+   }
+
+   public UnboundedArrayQueue(int capacity) throws QueueIsEmpty {
+       unbAQueue = new int[capacity];
+       this.dataType = "int";
+   }
+
+   public UnboundedArrayQueue(int capacity) throws QueueIsEmpty {
+       unbAQueue = new float[capacity];
+       this.dataType = "float";
+   }
+
+   public UnboundedArrayQueue(int capacity) throws QueueIsEmpty {
+       unbAQueue = new double[capacity];
+       this.dataType = "double";
+   }
+
+
     /**
      * Add adds the object in question, o, to the
      * end of the queue.
@@ -63,7 +121,7 @@ public class UnboundedArrayQueue<E extends Object> implements UnboundedQueue<E> 
      * (Elements are removed in the order they are added, FIFO).
      * @throws NullPointerException
      */
-    public E remove() {
+    public E remove() throws NullPointerException {
     
       // New array with one less element.
       Object[] tempQueue = new Object[unbAQueue.length];
@@ -98,7 +156,7 @@ public class UnboundedArrayQueue<E extends Object> implements UnboundedQueue<E> 
       
       try {
           if (size() == 0) {
-              throw new QueueIsEmpty("Empty.");
+              throw new QueueIsEmpty();
           }
       }catch(QueueIsEmpty q) {
           System.out.println(q.getMessage());
